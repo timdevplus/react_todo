@@ -20,6 +20,7 @@
 
 .todoList__header--input {
    min-width: 0;
+   width: 100%;
    padding: 10px;
 
    line-height: 35px;
