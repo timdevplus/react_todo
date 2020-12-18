@@ -1,25 +1,65 @@
-import logo from './logo.svg';
+// Modules
+import { useState, useEffect } from 'react';
+import idGen from './util/idGen';
+
+// Extern Components
+import Todo from './components/Todo/Todo.component';
+
+// Styles
 import './App.css';
 
+// File Component
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [inputTextBuffer, setInputTextBuffer] = useState('');
+   const [todoList, setTodoList] = useState(() => {
+      return (
+         (localStorage.getItem('todoList') &&
+            JSON.parse(localStorage.getItem('todoList'))) ||
+         []
+      );
+   });
+
+   useEffect(() => localStorage.setItem('todoList', JSON.stringify(todoList)), [
+      todoList
+   ]);
+
+   const handleToggleComplete = (todo) => {
+      const updatedTodoList = todoList.map((currentTodo) => {
+         return currentTodo.id === todo.id
+            ? { ...todo, completed: !todo.completed }
+            : currentTodo;
+      });
+      setTodoList(updatedTodoList);
+   };
+
+   const handleTodoInputChange = (e) => {
+      setInputTextBuffer(e.target.value);
+   };
+
+   const handleAddTodoItem = (e) => {
+      if (inputTextBuffer !== '') {
+         setTodoList([
+            ...todoList,
+            { id: idGen(), name: inputTextBuffer, completed: false }
+         ]);
+         setInputTextBuffer('');
+      }
+   };
+
+   const handleRemoveTodoItem = (id) => {
+      setTodoList(todoList.filter((todo) => todo.id !== id));
+   };
+
+   return (
+      <Todo
+         todoList={todoList}
+         inputTextBuffer={inputTextBuffer}
+         handleTodoInputChange={handleTodoInputChange}
+         handleAddTodoItem={handleAddTodoItem}
+         handleRemoveTodoItem={handleRemoveTodoItem}
+         handleToggleComplete={handleToggleComplete}
+      />
+   );
 }
 
 export default App;

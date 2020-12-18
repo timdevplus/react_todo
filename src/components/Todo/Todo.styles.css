@@ -1,0 +1,59 @@
+.todoList {
+   width: 50%;
+   min-width: 250px;
+
+   margin: 10rem auto;
+   padding: 3rem;
+
+   border-radius: 5px;
+   box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.3);
+   background-color: #fff;
+}
+
+.todoList__header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   margin-bottom: 1.5rem;
+}
+
+.todoList__header--input {
+   min-width: 0;
+   padding: 10px;
+
+   line-height: 35px;
+   font-size: 3rem;
+   font-weight: 300;
+   font-family: inherit;
+   color: rgba(0, 0, 0, 0.6);
+
+   border: none;
+   outline: none;
+   border-bottom: 1px solid rgb(173, 173, 173);
+}
+
+.todoList__header--input::placeholder {
+   color: inherit;
+   font-weight: 500;
+}
+
+.todoList__header--addBtn {
+   min-width: 38px;
+   height: 38px;
+
+   outline: none;
+   border: none;
+   border-radius: 50%;
+
+   margin-left: 1.25rem;
+
+   font-size: 1.75rem;
+
+   color: #fff;
+   background-color: rgb(20, 138, 251);
+}
+
+.todoList__body {
+   list-style: none;
+}
