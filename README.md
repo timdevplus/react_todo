@@ -1,1 +1,1 @@
-# Simple CRA Todolist written from scratch
+# Simple CRA Todolist
